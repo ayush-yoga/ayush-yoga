@@ -153,10 +153,32 @@
     }
 
     .hero-inner {
-      max-width: 800px;
+      max-width: 1100px;
       margin: 0 auto;
       padding: 0 24px;
-      text-align: center;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero-text {
+      text-align: left;
+    }
+
+    .hero-image {
+      width: 100%;
+      aspect-ratio: 3/4;
+      border-radius: 4px;
+      overflow: hidden;
+      background: linear-gradient(145deg, var(--beige) 0%, #D4B896 100%);
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     .hero-label {
@@ -276,31 +298,14 @@
       aspect-ratio: 3/4;
       background: linear-gradient(145deg, var(--beige) 0%, #D4B896 100%);
       border-radius: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       overflow: hidden;
     }
 
-    .about-box-inner {
-      text-align: center;
-      padding: 32px;
-    }
-
-    .about-lotus {
-      font-size: 5rem;
-      line-height: 1;
-      margin-bottom: 16px;
-      opacity: 0.65;
-    }
-
-    .about-quote {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: 1.1rem;
-      color: var(--terra-deep);
-      line-height: 1.6;
-      opacity: 0.85;
+    .about-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     .about-badge {
@@ -783,6 +788,14 @@
 
       .about-box { aspect-ratio: 4/3; }
 
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+
+      .hero-text { text-align: center; }
+
+      .hero-sub { margin-left: auto; margin-right: auto; }
+
+      .hero-image { aspect-ratio: 4/3; max-width: 480px; margin: 0 auto; }
+
       .hero-title { font-size: 2.8rem; }
 
       .btn-outline { margin-left: 0; margin-top: 12px; }
@@ -817,20 +830,26 @@
 <!-- ── Hero ── -->
 <section id="hero">
   <div class="hero-inner">
-    <span class="hero-label">Ashtanga Yoga · Ayurveda · Austin, TX</span>
-    <h1 class="hero-title">
-      Ancient roots,<br><em>lasting wellness</em>
-    </h1>
-    <p class="hero-sub">
-      Ashtanga yoga classes and certified Ayurvedic counseling rooted in the Manju Jois lineage — serving Austin, TX at Gym Studios and YMCA locations.
-    </p>
-    <div>
-      <a href="#schedule" class="btn btn-primary">View Schedule</a>
-      <a href="#contact"  class="btn btn-outline">Book a Session</a>
+    <div class="hero-text">
+      <span class="hero-label">Ashtanga Yoga · Ayurveda · Austin, TX</span>
+      <h1 class="hero-title">
+        Ancient roots,<br><em>lasting wellness</em>
+      </h1>
+      <p class="hero-sub">
+        Ashtanga yoga classes and certified Ayurvedic counseling rooted in the Manju Jois lineage — serving Austin, TX at Gym Studios and YMCA locations.
+      </p>
+      <div>
+        <a href="#schedule" class="btn btn-primary">View Schedule</a>
+        <a href="#contact"  class="btn btn-outline">Book a Session</a>
+      </div>
+      <div class="hero-scroll">
+        <div class="hero-scroll-line"></div>
+        <span>Scroll</span>
+      </div>
     </div>
-    <div class="hero-scroll">
-      <div class="hero-scroll-line"></div>
-      <span>Scroll</span>
+    <div class="hero-image">
+      <!-- Replace src with your hero yoga pose image path -->
+      <img src="images/hero-yoga-pose.jpg" alt="Yoga pose demonstration" />
     </div>
   </div>
 </section>
@@ -842,10 +861,8 @@
 
       <div class="about-visual">
         <div class="about-box">
-          <div class="about-box-inner">
-            <div class="about-lotus">🪷</div>
-            <p class="about-quote">"Yoga is 99% practice and 1% theory." — Sri K. Pattabhi Jois</p>
-          </div>
+          <!-- Replace src with your yoga pose image path -->
+          <img src="images/about-yoga-pose.jpg" alt="Yoga instructor demonstrating an Ashtanga pose" />
         </div>
         <div class="about-badge">15+ Years<br>Teaching</div>
       </div>
