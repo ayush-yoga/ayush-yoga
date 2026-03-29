@@ -805,7 +805,7 @@
       <li><a href="#about">About</a></li>
       <li><a href="#services">Services</a></li>
       <li><a href="#schedule">Schedule</a></li>
-      <li><a href="#testimonials">Testimonials</a></li>
+      <li><a href="#testimonials">Student Stories</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <button class="nav-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu">
@@ -855,7 +855,7 @@
         <h2 class="section-title">Rooted in tradition,<br>present with you</h2>
         <div class="divider"></div>
         <p>
-          My yoga journey began as a teenager in Mysuru, India — the spiritual heartland of Ashtanga yoga — where the practice wove itself into the rhythm of daily life. After moving to the United States, I deepened my formal training and earned my teaching certification at Life Time Power Yoga.
+          Hi, I'm Nandini. My yoga journey began as a teenager in Mysuru, India — the spiritual heartland of Ashtanga yoga — where the practice wove itself into the rhythm of daily life. After moving to the United States, I deepened my formal training and earned my teaching certification at Life Time Power Yoga.
         </p>
         <p>
           I continue my learning under Greg Tebb in the authentic Manju Jois lineage, staying true to the classical Ashtanga tradition passed down directly from Pattabhi Jois. I am also a certified Ayurveda Counselor, and I weave Ayurvedic principles into my teaching to offer a genuinely holistic wellness experience.
@@ -1103,51 +1103,12 @@
 <!-- ── Testimonials ── -->
 <section id="testimonials">
   <div class="container">
-    <div class="section-label">Testimonials</div>
-    <h2 class="section-title">Words from students</h2>
+    <div class="section-label">Student Stories</div>
+    <h2 class="section-title">In their own words</h2>
     <div class="divider"></div>
 
-    <div class="testimonials-grid">
-
-      <div class="testimonial-card">
-        <div class="testimonial-quote-mark">"</div>
-        <p class="testimonial-text">The morning Vinyasa class transformed my entire day. I leave every session feeling grounded, energized, and truly at peace with myself.</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">🌸</div>
-          <div>
-            <div class="stars">★★★★★</div>
-            <div class="author-name">Sarah M.</div>
-            <div class="author-detail">Yoga student, 2 years</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="testimonial-card">
-        <div class="testimonial-quote-mark">"</div>
-        <p class="testimonial-text">My Ayurveda consultation was a revelation. The personalized diet and lifestyle recommendations changed how I relate to my body and energy completely.</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">🌿</div>
-          <div>
-            <div class="stars">★★★★★</div>
-            <div class="author-name">Ravi K.</div>
-            <div class="author-detail">Ayurveda client</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="testimonial-card">
-        <div class="testimonial-quote-mark">"</div>
-        <p class="testimonial-text">As a complete beginner, I was nervous. The welcoming, patient instruction made me feel safe from day one. I now practice every week without fail.</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">🕊️</div>
-          <div>
-            <div class="stars">★★★★★</div>
-            <div class="author-name">Linda T.</div>
-            <div class="author-detail">Ashtanga Fundamentals student</div>
-          </div>
-        </div>
-      </div>
-
+    <div class="testimonials-grid" id="testimonialsGrid">
+      <div style="grid-column:1/-1;text-align:center;color:var(--muted);padding:32px;font-size:0.9rem;">Loading…</div>
     </div>
   </div>
 </section>
@@ -1267,6 +1228,37 @@
       document.getElementById('navLinks').classList.remove('open');
     });
   });
+
+  // ── Load testimonials dynamically from testimonials.json ──
+  const EMOJIS = ['🌸','🌿','🕊️','🌻','🍃','✨','🙏','🌺'];
+  function starHTML(n) {
+    return '★'.repeat(n) + '☆'.repeat(5 - n);
+  }
+  function renderTestimonials(list) {
+    const grid = document.getElementById('testimonialsGrid');
+    if (!list || !list.length) {
+      grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--muted);padding:32px;">No testimonials yet — check back soon!</p>';
+      return;
+    }
+    grid.innerHTML = list.map((t, i) => `
+      <div class="testimonial-card">
+        <div class="testimonial-quote-mark">"</div>
+        <p class="testimonial-text">${t.text}</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">${t.emoji || EMOJIS[i % EMOJIS.length]}</div>
+          <div>
+            <div class="stars">${starHTML(t.stars || 5)}</div>
+            <div class="author-name">${t.name}</div>
+            <div class="author-detail">${t.service}</div>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+  fetch('./testimonials.json?v=' + Date.now())
+    .then(r => r.json())
+    .then(renderTestimonials)
+    .catch(() => renderTestimonials([]));
 </script>
 
 </body>
