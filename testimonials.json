@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Sarah M.",
+    "service": "Ashtanga Yoga Class",
+    "text": "The morning Ashtanga class transformed my entire day. I leave every session feeling grounded, energized, and truly at peace with myself.",
+    "stars": 5,
+    "emoji": "🌸"
+  },
+  {
+    "name": "Ravi K.",
+    "service": "Ayurveda Consultation",
+    "text": "My Ayurveda consultation was a revelation. The personalized diet and lifestyle recommendations changed how I relate to my body and energy completely.",
+    "stars": 5,
+    "emoji": "🌿"
+  },
+  {
+    "name": "Linda T.",
+    "service": "Ashtanga Fundamentals",
+    "text": "As a complete beginner, I was nervous. The welcoming, patient instruction made me feel safe from day one. I now practice every week without fail.",
+    "stars": 5,
+    "emoji": "🕊️"
+  }
+]
