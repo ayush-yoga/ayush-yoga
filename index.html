@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nandini Yoga Shala & Ayurveda</title>
+  <title>Ayush Yoga & Ayurveda</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     /* ── Reset & Base ── */
@@ -529,76 +529,106 @@
       font-weight: 400;
     }
 
-    /* ── Testimonials ── */
+    /* ── Testimonials Rotator ── */
     #testimonials {
       background: var(--beige);
     }
 
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-
-    .testimonial-card {
-      background: var(--white);
-      padding: 36px 28px;
-      border-radius: 4px;
+    .testimonial-rotator {
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
       position: relative;
+      min-height: 280px;
     }
 
-    .testimonial-quote-mark {
+    .testimonial-stage {
+      transition: opacity 0.6s ease;
+    }
+
+    .testimonial-stage.fade-out { opacity: 0; }
+
+    .testimonial-quote-large {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 5rem;
-      line-height: 0.6;
+      font-size: 9rem;
+      line-height: 0.35;
       color: var(--terra);
-      opacity: 0.2;
-      position: absolute;
-      top: 20px; left: 22px;
+      opacity: 0.15;
+      display: block;
+      margin-bottom: 28px;
+      user-select: none;
     }
 
-    .testimonial-text {
+    .testimonial-body {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.05rem;
+      font-size: clamp(1.2rem, 2.5vw, 1.5rem);
       font-style: italic;
       color: var(--dark);
-      line-height: 1.75;
-      margin-bottom: 24px;
-      padding-top: 12px;
+      line-height: 1.8;
+      margin-bottom: 36px;
     }
 
-    .testimonial-author {
-      display: flex;
+    .testimonial-byline {
+      display: inline-flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
     }
 
-    .author-avatar {
-      width: 40px; height: 40px;
+    .byline-avatar {
+      width: 44px; height: 44px;
       border-radius: 50%;
-      background: var(--beige);
+      background: var(--white);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.1rem;
+      font-size: 1.25rem;
+      flex-shrink: 0;
     }
 
-    .author-name {
+    .byline-info { text-align: left; }
+
+    .byline-stars {
+      color: var(--terra);
+      font-size: 0.72rem;
+      margin-bottom: 2px;
+    }
+
+    .byline-name {
       font-weight: 500;
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       color: var(--dark);
     }
 
-    .author-detail {
+    .byline-detail {
       font-size: 0.75rem;
       color: var(--muted);
     }
 
-    .stars {
-      color: var(--terra);
-      font-size: 0.75rem;
-      margin-bottom: 4px;
+    .rotator-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 44px;
     }
+
+    .rotator-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--muted);
+      opacity: 0.3;
+      cursor: pointer;
+      transition: opacity 0.3s, background 0.3s, transform 0.3s;
+      border: none;
+      padding: 0;
+    }
+
+    .rotator-dot.active {
+      opacity: 1;
+      background: var(--terra);
+      transform: scale(1.4);
+    }
+
+    .rotator-dot:hover { opacity: 0.7; }
 
     /* ── Contact ── */
     #contact {
@@ -791,7 +821,7 @@
 
       .schedule-table { font-size: 0.85rem; }
       .schedule-table th, .schedule-table td { padding: 12px 8px; }
-      #tab-week > div[style*="grid-template-columns:repeat(3"] { grid-template-columns: 1fr !important; }
+      .testimonial-body { font-size: 1.15rem; }
     }
   </style>
 </head>
@@ -800,7 +830,7 @@
 <!-- ── Navigation ── -->
 <nav>
   <div class="nav-inner">
-    <a href="#hero" class="nav-logo">Nandini Yoga Shala & Ayurveda</a>
+    <a href="#hero" class="nav-logo">Ayush Yoga & Ayurveda</a>
     <ul class="nav-links" id="navLinks">
       <li><a href="#about">About</a></li>
       <li><a href="#services">Services</a></li>
@@ -822,7 +852,7 @@
       Ancient roots,<br><em>lasting wellness</em>
     </h1>
     <p class="hero-sub">
-      Ashtanga yoga classes rooted in the Manju Jois lineage and certified Ayurvedic counseling — serving Austin, TX at Gym Studios and YMCA locations.
+      Ashtanga yoga classes and certified Ayurvedic counseling rooted in the Manju Jois lineage — serving Austin, TX at Gym Studios and YMCA locations.
     </p>
     <div>
       <a href="#schedule" class="btn btn-primary">View Schedule</a>
@@ -926,6 +956,20 @@
       </div>
 
       <div class="service-card">
+        <div class="service-icon">🕊️</div>
+        <h3 class="service-title">Mind-Body Wellness</h3>
+        <p class="service-desc">
+          Integrated sessions combining yoga therapy and Ayurvedic principles for stress relief, sleep support, and emotional balance.
+        </p>
+        <ul class="service-list">
+          <li>Stress &amp; Anxiety Management</li>
+          <li>Sleep Improvement Programs</li>
+          <li>Breathwork (Pranayama) Therapy</li>
+          <li>Yoga Nidra Sessions</li>
+        </ul>
+      </div>
+
+      <div class="service-card">
         <div class="service-icon">✨</div>
         <h3 class="service-title">Intensive Workshop</h3>
         <p class="service-desc">
@@ -938,7 +982,7 @@
           <li>Philosophy &amp; lineage discussion</li>
           <li>Open to all dedicated practitioners</li>
         </ul>
-        <p style="margin-top:20px;font-size:0.8rem;color:var(--terra);font-weight:500;letter-spacing:0.05em;">Dates to be announced — contact to be notified</p>
+        <p style="margin-top:20px;font-size:0.8rem;color:var(--terra);font-weight:500;letter-spacing:0.05em;">Dates announced — contact to be notified</p>
       </div>
 
     </div>
@@ -1215,32 +1259,82 @@
     });
   });
 
-  // ── Load testimonials dynamically from testimonials.json ──
+  // ── Auto-rotating testimonials ──
   const EMOJIS = ['🌸','🌿','🕊️','🌻','🍃','✨','🙏','🌺'];
+  const INTERVAL = 6000;
+
   function starHTML(n) {
     return '★'.repeat(n) + '☆'.repeat(5 - n);
   }
+
   function renderTestimonials(list) {
-    const grid = document.getElementById('testimonialsGrid');
+    const wrap = document.getElementById('testimonialsGrid');
     if (!list || !list.length) {
-      grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--muted);padding:32px;">No testimonials yet — check back soon!</p>';
+      wrap.innerHTML = '<p style="text-align:center;color:var(--muted);padding:32px;">No stories yet — check back soon!</p>';
       return;
     }
-    grid.innerHTML = list.map((t, i) => `
-      <div class="testimonial-card">
-        <div class="testimonial-quote-mark">"</div>
-        <p class="testimonial-text">${t.text}</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">${t.emoji || EMOJIS[i % EMOJIS.length]}</div>
-          <div>
-            <div class="stars">${starHTML(t.stars || 5)}</div>
-            <div class="author-name">${t.name}</div>
-            <div class="author-detail">${t.service}</div>
+
+    wrap.className = 'testimonial-rotator';
+    wrap.innerHTML = `
+      <div class="testimonial-stage" id="tStage"></div>
+      <div class="rotator-dots" id="tDots"></div>
+    `;
+
+    const stage = document.getElementById('tStage');
+    const dotsEl = document.getElementById('tDots');
+    let current = 0;
+    let timer;
+
+    // Build dots
+    list.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'rotator-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', 'Story ' + (i + 1));
+      dot.addEventListener('click', () => goTo(i));
+      dotsEl.appendChild(dot);
+    });
+
+    function showSlide(i) {
+      const t = list[i];
+      stage.innerHTML = `
+        <span class="testimonial-quote-large">"</span>
+        <p class="testimonial-body">${t.text}</p>
+        <div class="testimonial-byline">
+          <div class="byline-avatar">${t.emoji || EMOJIS[i % EMOJIS.length]}</div>
+          <div class="byline-info">
+            <div class="byline-stars">${starHTML(t.stars || 5)}</div>
+            <div class="byline-name">${t.name}</div>
+            <div class="byline-detail">${t.service}</div>
           </div>
         </div>
-      </div>
-    `).join('');
+      `;
+      dotsEl.querySelectorAll('.rotator-dot')
+            .forEach((d, j) => d.classList.toggle('active', j === i));
+    }
+
+    function goTo(i) {
+      clearInterval(timer);
+      stage.classList.add('fade-out');
+      setTimeout(() => {
+        current = i;
+        showSlide(current);
+        stage.classList.remove('fade-out');
+        startTimer();
+      }, 600);
+    }
+
+    function startTimer() {
+      timer = setInterval(() => goTo((current + 1) % list.length), INTERVAL);
+    }
+
+    // Pause rotation while hovering
+    wrap.addEventListener('mouseenter', () => clearInterval(timer));
+    wrap.addEventListener('mouseleave', startTimer);
+
+    showSlide(0);
+    startTimer();
   }
+
   fetch('./testimonials.json?v=' + Date.now())
     .then(r => r.json())
     .then(renderTestimonials)
