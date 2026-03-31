@@ -1275,6 +1275,9 @@
       return;
     }
 
+    // Shuffle order on every page load
+    list = list.sort(() => Math.random() - 0.5);
+
     wrap.className = 'testimonial-rotator';
     wrap.innerHTML = `
       <div class="testimonial-stage" id="tStage"></div>
