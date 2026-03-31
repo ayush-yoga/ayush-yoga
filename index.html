@@ -924,7 +924,7 @@
       <div class="section-label">Services</div>
       <h2 class="section-title">What I offer</h2>
       <div class="divider"></div>
-      <p>Authentic Ashtanga yoga in the Manju Jois tradition, complementary class styles for all needs, and certified Ayurvedic counseling — all offered across Austin, TX.</p>
+      <p>Authentic Ashtanga yoga in the Manju Jois tradition, certified Ayurvedic counseling, and immersive intensives — available online and in person in Austin, TX.</p>
     </div>
 
     <div class="services-grid">
@@ -1150,21 +1150,14 @@
             <div class="contact-icon">📍</div>
             <div>
               <div class="contact-detail-label">Location</div>
-              <div class="contact-detail-value">Austin, TX<br><small style="color:var(--muted)">Gym Studios &amp; YMCA locations · Online available</small></div>
-            </div>
-          </li>
-          <li class="contact-info-item">
-            <div class="contact-icon">📞</div>
-            <div>
-              <div class="contact-detail-label">Phone</div>
-              <div class="contact-detail-value"><a href="tel:+15550000000">(555) 000-0000</a></div>
+              <div class="contact-detail-value">Austin, TX<br><small style="color:var(--muted)">Gym Studios &amp; YMCA locations · Also online via Zoom</small></div>
             </div>
           </li>
           <li class="contact-info-item">
             <div class="contact-icon">✉️</div>
             <div>
               <div class="contact-detail-label">Email</div>
-              <div class="contact-detail-value"><a href="mailto:hello@ayushyoga.com">hello@ayushyoga.com</a></div>
+              <div class="contact-detail-value">Use the form to get in touch</div>
             </div>
           </li>
         </ul>
@@ -1180,18 +1173,18 @@
       </div>
 
       <div>
-        <form class="contact-form" onsubmit="handleSubmit(event)">
+        <form class="contact-form" id="contactForm">
           <div class="form-group">
             <label for="name">Your Name</label>
-            <input type="text" id="name" placeholder="Jane Doe" required />
+            <input type="text" id="name" name="name" placeholder="Jane Doe" required />
           </div>
           <div class="form-group">
-            <label for="email">Email Address</label>
-            <input type="email" id="email" placeholder="jane@example.com" required />
+            <label for="email">Your Email</label>
+            <input type="email" id="email" name="email" placeholder="jane@example.com" required />
           </div>
           <div class="form-group">
             <label for="interest">I'm interested in…</label>
-            <select id="interest">
+            <select id="interest" name="interest">
               <option value="">Select a service</option>
               <option>Yoga Classes (Group)</option>
               <option>Private Yoga Session</option>
@@ -1202,11 +1195,14 @@
           </div>
           <div class="form-group">
             <label for="message">Message</label>
-            <textarea id="message" placeholder="Tell me a bit about yourself, your goals, or any questions you have…"></textarea>
+            <textarea id="message" name="message" placeholder="Tell me a bit about yourself, your goals, or any questions you have…"></textarea>
           </div>
           <button type="submit" class="btn btn-primary" style="width:100%;text-align:center;">Send Message</button>
           <div id="form-success" style="display:none;text-align:center;color:var(--sage);font-size:0.9rem;padding:12px;">
             ✓ Thank you! I'll be in touch within 1–2 business days.
+          </div>
+          <div id="form-error" style="display:none;text-align:center;color:var(--terra);font-size:0.9rem;padding:12px;">
+            Something went wrong — please try again or email me directly.
           </div>
         </form>
       </div>
@@ -1234,13 +1230,34 @@
     event.target.classList.add('active');
   }
 
-  // Simple contact form handler
-  function handleSubmit(e) {
+  // Contact form — Formspree submission
+  document.getElementById('contactForm').addEventListener('submit', async function(e) {
     e.preventDefault();
-    document.getElementById('form-success').style.display = 'block';
-    e.target.reset();
-    setTimeout(() => { document.getElementById('form-success').style.display = 'none'; }, 5000);
-  }
+    const btn     = this.querySelector('button[type="submit"]');
+    const success = document.getElementById('form-success');
+    const error   = document.getElementById('form-error');
+    success.style.display = 'none';
+    error.style.display   = 'none';
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+    try {
+      const res = await fetch('https://formspree.io/f/mpqorgea', {
+        method:  'POST',
+        headers: { 'Accept': 'application/json' },
+        body:    new FormData(this)
+      });
+      if (res.ok) {
+        success.style.display = 'block';
+        this.reset();
+      } else {
+        error.style.display = 'block';
+      }
+    } catch {
+      error.style.display = 'block';
+    }
+    btn.textContent = 'Send Message';
+    btn.disabled = false;
+  });
 
   // Close mobile nav on link click
   document.querySelectorAll('#navLinks a').forEach(link => {
