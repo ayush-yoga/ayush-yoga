@@ -1268,6 +1268,14 @@
     return '★'.repeat(n) + '☆'.repeat(5 - n);
   }
 
+  function formatName(name) {
+    const parts = name.trim().split(/\s+/);
+    if (parts.length === 1) return parts[0];
+    const first = parts[0];
+    const lastInitial = parts[parts.length - 1][0].toUpperCase();
+    return first + ' ' + lastInitial + '.';
+  }
+
   function renderTestimonials(list) {
     const wrap = document.getElementById('testimonialsGrid');
     if (!list || !list.length) {
@@ -1307,7 +1315,7 @@
           <div class="byline-avatar">${t.emoji || EMOJIS[i % EMOJIS.length]}</div>
           <div class="byline-info">
             <div class="byline-stars">${starHTML(t.stars || 5)}</div>
-            <div class="byline-name">${t.name}</div>
+            <div class="byline-name">${formatName(t.name)}</div>
             <div class="byline-detail">${t.service}</div>
           </div>
         </div>
