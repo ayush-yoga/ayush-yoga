@@ -1261,7 +1261,8 @@
 
   // ── Auto-rotating testimonials ──
   const EMOJIS = ['🌸','🌿','🕊️','🌻','🍃','✨','🙏','🌺'];
-  const INTERVAL = 6000;
+  const isTouchDevice = () => window.matchMedia('(hover: none)').matches;
+  const INTERVAL = isTouchDevice() ? 14000 : 10000;
 
   function starHTML(n) {
     return '★'.repeat(n) + '☆'.repeat(5 - n);
@@ -1327,9 +1328,24 @@
       timer = setInterval(() => goTo((current + 1) % list.length), INTERVAL);
     }
 
-    // Pause rotation while hovering
+    // Desktop: pause on hover
     wrap.addEventListener('mouseenter', () => clearInterval(timer));
-    wrap.addEventListener('mouseleave', startTimer);
+    wrap.addEventListener('mouseleave', () => { if (!paused) startTimer(); });
+
+    // Mobile: tap to pause/resume
+    let paused = false;
+    stage.addEventListener('click', () => {
+      if (!isTouchDevice()) return;
+      paused = !paused;
+      if (paused) {
+        clearInterval(timer);
+        stage.style.outline = '1.5px solid rgba(181,98,42,0.25)';
+        stage.style.borderRadius = '4px';
+      } else {
+        stage.style.outline = 'none';
+        startTimer();
+      }
+    });
 
     showSlide(0);
     startTimer();
