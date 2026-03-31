@@ -126,7 +126,8 @@
       min-height: 100vh;
       display: flex;
       align-items: center;
-      background: linear-gradient(155deg, #F8F0E3 55%, #E8D5B7 100%);
+      background: linear-gradient(to bottom, rgba(44,36,22,0.45) 0%, rgba(44,36,22,0.2) 50%, rgba(44,36,22,0.55) 100%),
+                  url('./hero.jpg') center center / cover no-repeat;
       padding-top: 64px;
       position: relative;
       overflow: hidden;
@@ -165,8 +166,8 @@
       font-weight: 500;
       letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: var(--sage);
-      border: 1px solid var(--sage-light);
+      color: rgba(255,255,255,0.85);
+      border: 1px solid rgba(255,255,255,0.4);
       padding: 6px 16px;
       border-radius: 100px;
       margin-bottom: 28px;
@@ -175,22 +176,24 @@
     .hero-title {
       font-size: clamp(3rem, 7vw, 5.5rem);
       line-height: 1.05;
-      color: var(--dark);
+      color: var(--white);
       margin-bottom: 24px;
       font-weight: 300;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
     }
 
     .hero-title em {
       font-style: italic;
-      color: var(--terra);
+      color: #F0C9A0;
     }
 
     .hero-sub {
       font-size: 1.05rem;
-      color: var(--muted);
+      color: rgba(255,255,255,0.82);
       max-width: 520px;
       margin: 0 auto 44px;
       line-height: 1.8;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.3);
     }
 
     .btn {
@@ -221,13 +224,14 @@
 
     .btn-outline {
       background: transparent;
-      color: var(--dark);
-      border: 1.5px solid rgba(44,36,22,0.35);
+      color: var(--white);
+      border: 1.5px solid rgba(255,255,255,0.6);
       margin-left: 12px;
     }
 
     .btn-outline:hover {
-      border-color: var(--dark);
+      border-color: white;
+      background: rgba(255,255,255,0.1);
       transform: translateY(-2px);
     }
 
@@ -237,7 +241,7 @@
       flex-direction: column;
       align-items: center;
       gap: 8px;
-      color: var(--muted);
+      color: rgba(255,255,255,0.55);
       font-size: 0.7rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
